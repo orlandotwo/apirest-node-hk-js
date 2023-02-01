@@ -44,8 +44,30 @@ const artistAlbums = async(access_token,idArtist = '') => {
         throw error;
     }
 }
+const getAlbum = async(access_token,idAlbum = '') => {
+    try {
+        const authOptions = {
+            url: `https://api.spotify.com/v1/albums/${idAlbum}`,
+            data: undefined,
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'Content-Type: application/json',
+                'Authorization': `Bearer ${access_token}`
+            },
+            params: {
+                type: "album"
+            }
+        };
+        let resp = await axios(authOptions);
 
+        return resp;
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}
 module.exports = {
     artist,
-    artistAlbums
+    artistAlbums,
+    getAlbum
 }
